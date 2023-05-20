@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DataItem from "./DataItem";
 import styled from "styled-components";
-
+// 현재상영작에 대해 알려줌
 function Datas() {
   const [datas, setDatas] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -31,7 +31,7 @@ function Datas() {
   if (error) return <div>에러가 발생했습니다</div>;
 
   if (!datas) return null;
-
+// tmdb api를 가져옴
   return (
     <div>
       <Heading>Now Playing🎬</Heading>

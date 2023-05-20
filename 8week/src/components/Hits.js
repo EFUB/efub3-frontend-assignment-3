@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import HitItem from "./HitItem";
 import styled from "styled-components";
-
+//추천작들을 보여줌
 function Hits() {
   const [hits, setHits] = useState(null);
   const [loading, setLoading] = useState(false);
