@@ -1,12 +1,16 @@
 import React from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
-const Movie = ({ cover, title }) => {
+const Movie = ({ id, cover, title }) => {
   return (
-    <div>
+    <NavLink to={`/detail/${id}`}>
       <img src={cover} alt="" />
       <div>{title}</div>
-    </div>
+    </NavLink>
   );
 };
+
+const Container = styled.div``;
 
 export default Movie;

@@ -5,7 +5,9 @@ import Movie from "../components/Movie";
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const getMovies = async () => {
-    const response = await axios.get("https://yts.mx/api/v2/list_movies.json");
+    const response = await axios.get(
+      "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.0&sor_by=year"
+    );
     setMovies(response.data.data.movies);
     console.log(response.data.data.movies);
   };
@@ -18,6 +20,7 @@ const Home = () => {
         return (
           <Movie
             key={movie.id}
+            id={movie.id}
             cover={movie.medium_cover_image}
             title={movie.title}
           />
