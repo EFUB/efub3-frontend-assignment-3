@@ -4,13 +4,15 @@ import { NavLink } from "react-router-dom";
 
 const Movie = ({ id, cover, title }) => {
   return (
-    <NavLink to={`/detail/${id}`}>
+    <NLink to={`/detail/${id}`}>
       <img src={cover} alt="" />
       <div>{title}</div>
-    </NavLink>
+    </NLink>
   );
 };
 
-const Container = styled.div``;
+const NLink = styled(NavLink)`
+  margin: 10px;
+`;
 
 export default Movie;
