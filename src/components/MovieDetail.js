@@ -29,7 +29,7 @@ const MovieDetail = () => {
                                 {loading ? (
                                     <Text>Loading...</Text>
                                 ) : (
-                                    (movie.genres.map((genre) => {
+                                    (movie && movie.genres.map((genre) => {
                                         return (
                                             <Text key={genre.id}>{genre.name}&nbsp;&nbsp;</Text>    // 장르
                                         )
@@ -41,7 +41,7 @@ const MovieDetail = () => {
                                 {loading ? (
                                     <Text>Loading...</Text>
                                 ) : (
-                                    (movie.production_countries
+                                    (movie && movie.production_countries
                                         .map((country) => {
                                         return (
                                             <Text key={country.iso_3166_1}>{country.iso_3166_1}&nbsp;&nbsp;</Text>  // 제작 국가

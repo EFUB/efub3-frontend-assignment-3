@@ -28,7 +28,7 @@ const PopularMovieList = () => {
                     {loading ? (
                         <LoadingText>Loading...</LoadingText>
                     ) : (
-                        movies.results.map((movie) => {
+                        movies && movies.results.map((movie) => {
                             return (
                                 <MovieItem
                                     key={movie.id}
