@@ -2,19 +2,33 @@ import React from "react";
 import styled from "styled-components";
 
 //영화 목록을 화면에 출력하는 컴포넌트
-function MovieTemplate({ id, year, title, poster, rating, genres }) {
+function MovieTemplate({
+  isDarkMode,
+  year,
+  title,
+  poster,
+  rating,
+  genres,
+  rank,
+}) {
+  //하나의 컴포넌트에서 스토어에 저장된 isDarkMode를 기준으로 라이트 모드와 다크 모드를 모두 구현
   return (
-    <MovieBox>
+    <MovieBox isDarkMode={isDarkMode}>
       <MovieItem>
-        <MovieImg src={poster} alt={title} title={title}></MovieImg>
-        <MovieDes>
+        <MovieRank isDarkMode={isDarkMode}>{rank}</MovieRank>
+        <MovieImg
+          src={poster}
+          alt={title}
+          title={title}
+          isDarkMode={isDarkMode}
+        ></MovieImg>
+        <MovieDes isDarkMode={isDarkMode}>
           <h2>{title}</h2>
           <div>#Release Year: {year}</div>
           <div>#Rating : {rating}</div>
           <div>
-            {/* 장르가 두 개 이상일때 한 칸 띄고 표시되도록 map 함수를 사용 */}
-            {genres.map((genre) => (
-              <span key={id}>#{genre} </span>
+            {genres.map((genre, index) => (
+              <span key={index}>#{genre} </span>
             ))}
           </div>
         </MovieDes>
@@ -24,35 +38,56 @@ function MovieTemplate({ id, year, title, poster, rating, genres }) {
 }
 
 const MovieBox = styled.div`
-  background-color: #e9ecef;
+  background-color: ${(props) => (props.isDarkMode ? "#03071E" : "#e9ecef")};
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-
+const MovieRank = styled.div`
+  background-color: ${(props) => (props.isDarkMode ? "#fff2b2" : "#dee2e6")};
+  box-shadow: ${(props) =>
+    props.isDarkMode
+      ? "0 8px 10px 5px rgba(255, 255, 255, 0.5);"
+      : "0 8px 10px 5px rgba(0, 0, 0, 0.5)"};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1em;
+  padding: 1em;
+  height: 1em;
+  font-weight: bold;
+  font-size: 1.2em;
+  border-radius: 0.5em;
+`;
 const MovieImg = styled.img`
+  box-shadow: ${(props) =>
+    props.isDarkMode
+      ? "0 8px 17px 5px rgba(255, 255, 255, 0.5);"
+      : "0 13px 20px 5px rgba(0, 0, 0, 0.8)"};
   width: 9em;
   height: 13em;
-  border-radius: 16px;
-  box-shadow: 0 13px 20px 5px rgba(0, 0, 0, 0.8);
+  border-radius: 1.2em;
 `;
 
 const MovieItem = styled.div`
   display: flex;
-  margin: 15px;
+  margin: 1.2em;
 `;
 
 const MovieDes = styled.div`
+  background-color: ${(props) => (props.isDarkMode ? "#fff2b2" : "#dee2e6")};
+  box-shadow: ${(props) =>
+    props.isDarkMode
+      ? "0 10px 15px 5px rgba(255, 255, 255, 0.5);"
+      : "0 10px 15px 5px rgba(0, 0, 0, 0.2)"};
   color: #03071e;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-left: 1em;
-  font-size: 20px;
-  background-color: #dee2e6;
-  padding: 2px 20px;
-  border-radius: 20px;
-  box-shadow: 0 10px 15px 5px rgba(0, 0, 0, 0.2);
+  font-size: 1.2em;
+  padding: 0.2em 1.2em;
+  border-radius: 1.2em;
 `;
 
 export default MovieTemplate;
