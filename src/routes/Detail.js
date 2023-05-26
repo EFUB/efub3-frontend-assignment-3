@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
-const Detail = () => {
+const Detail = (props) => {
   //영화종류에 따라 상세 페이지가 달라야해서 동적으로 id를 지정해줌
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -26,11 +26,11 @@ const Detail = () => {
   }, []);
 
   return (
-    <div>
+    <div className="Detail">
       {loading ? (
         <h2>Loading...</h2>
       ) : (
-        <div>
+        <div className="detail">
           <h1>{Mdetail.title}</h1>
           <img src={Mdetail.medium_cover_image} />
           <h3>{`Rating: ${Mdetail.rating}`}</h3>

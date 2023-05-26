@@ -20,11 +20,11 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="Home">
       {loading ? (
-        <h1>Loading...</h1>
+        <h2>Loading...</h2>
       ) : (
-        <div>
+        <div className="home">
           {movies.map((movie) => (
             <Movie
               key={movie.id}
@@ -34,6 +34,7 @@ const Home = () => {
               year={movie.year}
               rating={movie.rating}
               genres={movie.genres}
+              summary={movie.summary}
             />
           ))}
         </div>
