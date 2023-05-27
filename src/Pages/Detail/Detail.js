@@ -4,10 +4,11 @@ import useAxios from "../../hook/useAxios";
 import styled from "styled-components";
 import RatingStar from "../Main/components/Rating";
 import LoadingPage from "../../components/Loading";
-
+import { useSelector } from "react-redux";
 //해당 영화를 클릭하면 이동하는 디테일 페이지.
 //
 const DetailPage = () => {
+  const mode = useSelector((state) => state);
   //useLoacation(파라미터 가져오는 기능)
   //useNavigate(페이지 이동하는 기능 ) 사용
   const location = useLocation();
@@ -43,10 +44,11 @@ const DetailPage = () => {
 
   //targetMovie가 있다면 해당 영화의 디테일 페이지를 렌더링하고, 아직 없다면(위 과정 진행중이라면)
   //로딩 페이지를 보여줌.
+
   return (
     <>
       {targetMovie ? (
-        <Wrapper>
+        <Wrapper mode={mode}>
           <BackButton onClick={onMoveBackPage}>뒤로 가기</BackButton>
           <MovieImg src={`${targetMovie.medium_cover_image}`} />
           <Text>
@@ -75,12 +77,18 @@ const DetailPage = () => {
 };
 export default DetailPage;
 
+//mode에 따라서 배경색과 색을 다르게 지정함.
 const Wrapper = styled.div`
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  padding-top: 20px;
+  background-color: ${(props) => (props.mode ? "white" : "black")};
+  color: ${(props) => (props.mode ? "black" : "white")};
+  background-color: "white";
+  color: "black";
 `;
 
 const MovieImg = styled.img`
@@ -149,4 +157,5 @@ const BackButton = styled.div`
   :hover {
     background-color: #e6dce2;
   }
+  color: black;
 `;

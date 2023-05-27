@@ -1,7 +1,6 @@
 import OneMovie from "./OneMovie";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useContext } from "react";
 //메인 페이지에서 보여줄 영화 목록 컴포넌트
 //main.js에서 props로 movieList, loading, error를 전달받음
 //정렬 전의 데이터를 sortedData, 정렬 후의 데이터를 sortedData(state)로 지정
@@ -43,6 +42,7 @@ const MovieList = ({ movieList, loading, error }) => {
   //CurrentButton(최신순 정렬)을 누르면 sortCurrent가,
   //RateButton(평점순 정렬)을 누르면 sortRate가 실행된다.
   //해당 sortedData를 map을 통해 하나하나씩 OneMovie컴포넌트로 렌더링한다.
+
   return (
     <div>
       {loading ? (
@@ -82,8 +82,6 @@ export default MovieList;
 
 export const ListWrapper = styled.div`
   width: 1000px;
-
-  height: 900px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -99,7 +97,20 @@ const ButtonContainer = styled.div`
   z-index: 200;
   display: flex;
   justify-content: space-between;
-  width: 230px;
+  width: 180px;
+`;
+
+const ModeButton = styled.button`
+  height: 70px;
+  width: 100px;
+  font-size: 20px;
+  background-color: ${(props) => (props.current ? "#f7d0f3" : "white")};
+  border: 0;
+  border-radius: 10px;
+  font-weight: 600;
+  :hover {
+    background-color: #e6dce2;
+  }
 `;
 
 const CurrentButton = styled.button`
