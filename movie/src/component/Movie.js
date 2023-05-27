@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MovieTemplate from "./MovieTemplate.js";
-import MovieTemplateDarkMode from "./MovieTemplateDarkMode.js";
 import { useDispatch, useSelector } from "react-redux";
 
 //영화 api의 데이터를 movies에 저장하는 컴포넌트
