@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Movie from "../components/Movie";
+import styled from "styled-components";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -22,9 +23,9 @@ const Home = () => {
   return (
     <div className="Home">
       {loading ? (
-        <h2>Loading...</h2>
+        <Loading>Loading...</Loading>
       ) : (
-        <div className="home">
+        <HMain>
           {movies.map((movie) => (
             <Movie
               key={movie.id}
@@ -37,10 +38,27 @@ const Home = () => {
               summary={movie.summary}
             />
           ))}
-        </div>
+        </HMain>
       )}
     </div>
   );
 };
 
 export default Home;
+
+const HMain = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  /* 줄넘김 처리 */
+`;
+
+const Loading = styled.h2`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;

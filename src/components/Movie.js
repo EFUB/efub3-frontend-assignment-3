@@ -1,5 +1,6 @@
 import Detail from "../routes/Detail";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const Movie = ({
   medium_cover_image,
@@ -14,29 +15,57 @@ const Movie = ({
     summary.length > 100 ? summary.substring(0, 250) : summary;
 
   return (
-    <div className="Movie">
+    <MovieSt>
       <h2>
         <Link to={`/detail/${id}`}>{title}</Link>
       </h2>
-      <div className="content">
-        <div className="left">
-          <img src={medium_cover_image} />
+      <Content>
+        <div>
+          <MovieIMG src={medium_cover_image} />
         </div>
         <div>
-          <p>{`개봉년도: ${year}`}</p>
-          <p>{`평점: ${rating}`}</p>
+          <MovieP>{`개봉년도: ${year}`}</MovieP>
+          <MovieP>{`평점: ${rating}`}</MovieP>
           <div>
             {genres.map((g) => (
               <li key={g}>{g}</li>
             ))}
           </div>
         </div>
-      </div>
+      </Content>
       <div className="summary">
-        <p>{lightSummary}...</p>
+        <MovieP>{lightSummary}...</MovieP>
       </div>
-    </div>
+    </MovieSt>
   );
 };
 
 export default Movie;
+
+const MovieSt = styled.div`
+  text-align: center;
+  width: 500px;
+  height: 450px;
+  border: 1px solid gray;
+  box-shadow: 0px 0px 5px 0px gray;
+
+  margin: 10px 20px 20px 10px;
+`;
+
+const MovieP = styled.p`
+  margin-left: 10px;
+  margin-right: 10px;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MovieIMG = styled.img`
+  width: 170px;
+  height: 210px;
+  margin-right: 30px;
+`;
