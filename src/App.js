@@ -6,6 +6,7 @@ import MovieDetail from "./components/MovieDetail";
 import PopularMoviePage from "./page/PopularMoviePage";
 import NowplayingMoviePage from "./page/NowplayingMoviePage";
 import Button from "./components/Button";
+import GlobalStyle from "./GlobalStyle";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const App = () => {
 
     return (
         <>
-            <Div isDarkMode={isDarkMode}>
+            <GlobalStyle isDarkMode={isDarkMode} />
             <Wrapper>
                 <Button onClick={handleClick}/>
                 <NavBar />
@@ -35,19 +36,10 @@ const App = () => {
                     <Route path="/nowplaying" element={<NowplayingMoviePage />} />
                 </Routes>
             </Wrapper>
-            </Div>
         </>
 
     );
 }
-
-const Div = styled.div`
-    margin: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: ${({isDarkMode}) => isDarkMode ? "black" : "white"};
-    color: ${({isDarkMode}) => isDarkMode ? "white" : "black"};
-`;
 
 const Wrapper = styled.div`
     padding: auto;

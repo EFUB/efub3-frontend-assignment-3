@@ -35,14 +35,10 @@ const Wrapper = styled.div`
     margin: auto;
     height: 20%;
     text-align: center;
-    a {
-        color: ${({isDarkMode}) => isDarkMode ? "white" : "black"};
-    }
 `;
 
 // 8주차 피드백 반영 및 수정
 const NavStyle = styled(NavLink)`
-    text-decoration: none;
     font-size: 20px;
     padding: 20px 0;
     text-align: center;

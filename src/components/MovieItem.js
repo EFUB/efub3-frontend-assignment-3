@@ -34,10 +34,6 @@ const Wrapper = styled.div`
     :hover {
         transform: scale(1.1);
     }
-    a {
-        color: ${({isDarkMode}) => isDarkMode ? "white" : "black"};
-        text-decoration: none;
-    }
     cursor: pointer;
 `;
 
