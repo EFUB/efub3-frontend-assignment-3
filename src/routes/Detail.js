@@ -60,4 +60,5 @@ const Loading = styled.h2`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: white;
 `;

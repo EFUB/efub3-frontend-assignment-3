@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Movie from "../components/Movie";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -20,25 +21,41 @@ const Home = () => {
     getMovies();
   }, []);
 
+  const isDarkMode = useSelector((state) => state.isDarkMode);
+  const dispatch = useDispatch();
+
+  const handleDarkMode = () => {
+    dispatch({ type: "DarkMode" });
+  };
+
   return (
     <div className="Home">
       {loading ? (
         <Loading>Loading...</Loading>
       ) : (
-        <HMain>
-          {movies.map((movie) => (
-            <Movie
-              key={movie.id}
-              id={movie.id}
-              medium_cover_image={movie.medium_cover_image}
-              title={movie.title}
-              year={movie.year}
-              rating={movie.rating}
-              genres={movie.genres}
-              summary={movie.summary}
-            />
-          ))}
-        </HMain>
+        <div>
+          <AppContainer isDarkMode={isDarkMode}>
+            <ButtonContainer>
+              <Button onClick={handleDarkMode}>
+                {isDarkMode ? "WhiteMode" : "DarkMode"}
+              </Button>
+            </ButtonContainer>
+            <HMain>
+              {movies.map((movie) => (
+                <Movie
+                  key={movie.id}
+                  id={movie.id}
+                  medium_cover_image={movie.medium_cover_image}
+                  title={movie.title}
+                  year={movie.year}
+                  rating={movie.rating}
+                  genres={movie.genres}
+                  summary={movie.summary}
+                />
+              ))}
+            </HMain>
+          </AppContainer>
+        </div>
       )}
     </div>
   );
@@ -61,4 +78,28 @@ const Loading = styled.h2`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+const AppContainer = styled.div`
+  background-color: ${(props) => (props.isDarkMode ? "#000" : "#fff")};
+  color: ${(props) => (props.isDarkMode ? "#fff" : "#000")};
+`;
+
+const Button = styled.button`
+  /* display: flex;
+  flex-direction: row-reverse; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 5px 5px 5px 5px;
+  margin-top: 10px;
+  margin-right: 15px;
+  border-color: white;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
 `;

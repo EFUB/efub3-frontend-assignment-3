@@ -1,6 +1,7 @@
 import Detail from "../routes/Detail";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Movie = ({
   medium_cover_image,
@@ -14,10 +15,17 @@ const Movie = ({
   const lightSummary =
     summary.length > 100 ? summary.substring(0, 250) : summary;
 
+  const isDarkMode = useSelector((state) => state.isDarkMode);
+
   return (
     <MovieSt>
-      <h2>
-        <Link to={`/detail/${id}`}>{title}</Link>
+      <h2 isDarkMode={isDarkMode}>
+        <Link
+          to={`/detail/${id}`}
+          style={{ color: isDarkMode ? "yellow" : "black" }}
+        >
+          {title}
+        </Link>
       </h2>
       <Content>
         <div>
