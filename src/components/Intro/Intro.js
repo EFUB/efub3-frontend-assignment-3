@@ -1,4 +1,4 @@
-import { ReactComponent as Netflix } from "../images/netflix_icon.svg";
+import { ReactComponent as Netflix } from "../../images/netflix_icon.svg";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
