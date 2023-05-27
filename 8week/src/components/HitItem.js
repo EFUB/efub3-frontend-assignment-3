@@ -13,18 +13,17 @@ function HitItem({ imgSrc, alt, title, vote_average, overview }) {
 }
 
 const ListItem = styled.li`
-  flex-direction: row;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
-  width: 400px;
+  width: 100%;
   outline: auto;
 `;
 
 const Image = styled.img`
-  width: 400px;
-  height: 200px;
+  width: 100%;
+  height: 350px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 

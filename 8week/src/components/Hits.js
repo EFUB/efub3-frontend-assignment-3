@@ -36,7 +36,8 @@ function Hits() {
     <div>
       <Heading>Recommendation💚</Heading>
       <Order>
-        <ol>
+        <div>
+          <HitList>
           {" "}
           {hits.results.map((hit) => (
             <HitItem
@@ -48,7 +49,8 @@ function Hits() {
               overview={hit.overview}
             />
           ))}{" "}
-        </ol>
+          </HitList>
+        </div>
       </Order>
     </div>
   );
@@ -61,6 +63,14 @@ const Heading = styled.h1`
   font-weight: bold;
   margin-bottom: 20px;
 `;
+const HitList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  justify-items: center;
+`;
+
+
 const Order = styled.ol`
   flex-direction: row;
 `;

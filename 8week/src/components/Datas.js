@@ -31,23 +31,24 @@ function Datas() {
   if (error) return <div>에러가 발생했습니다</div>;
 
   if (!datas) return null;
-// tmdb api를 가져옴
+  // tmdb api를 가져옴
   return (
     <div>
       <Heading>Now Playing🎬</Heading>
-
-      <ul>
-        {datas.results.map((data) => (
-          <DataItem
-            key={data.id}
-            imgSrc={`https://image.tmdb.org/t/p/w300/${data.poster_path}`}
-            alt={data.title}
-            title={data.title}
-            vote_average={data.vote_average}
-            overview={data.overview}
-          />
-        ))}{" "}
-      </ul>
+      <div>
+        <DataList>
+          {datas.results.map((data) => (
+            <DataItem
+              key={data.id}
+              imgSrc={`https://image.tmdb.org/t/p/w300/${data.poster_path}`}
+              alt={data.title}
+              title={data.title}
+              vote_average={data.vote_average}
+              overview={data.overview}
+            />
+          ))}{" "}
+        </DataList>
+      </div>
     </div>
   );
 }
@@ -58,6 +59,13 @@ const Heading = styled.h1`
   text-align: center;
   font-weight: bold;
   margin-bottom: 20px;
+`;
+
+const DataList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  justify-items: center;
 `;
 
 export default Datas;
