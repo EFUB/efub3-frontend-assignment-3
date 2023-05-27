@@ -14,16 +14,13 @@ const initialState = {
 };
 
 // 리듀서 생성
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case TOGGLE_THEME:
-      return {
-        ...state,
-        isDarkMode: !state.isDarkMode,
-      };
-    default:
-      return state;
-  }
+const reducer = (currentState = initialState, action) => {
+  if (action.type === "TOGGLE_THEME") {
+    return {
+      ...currentState,
+      isDarkMode: !currentState.isDarkMode,
+    };
+  } else return currentState;
 };
 
 // 스토어 생성

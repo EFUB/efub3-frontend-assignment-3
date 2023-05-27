@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MovieTemplate from "./MovieTemplate.js";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 //영화 api의 데이터를 movies에 저장하는 컴포넌트
 function Movie() {
@@ -16,6 +16,7 @@ function Movie() {
       const response = await axios.get(
         "https://yts.mx/api/v2/list_movies.json?sort_by=rating" //영화를 평점이 높은 순서로 정렬
       );
+      //순위를 추가
       const moviesWithRank = response.data.data.movies.map((movie, index) => ({
         ...movie,
         rank: index + 1,
