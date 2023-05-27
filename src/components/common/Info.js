@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 // 영화 개별 정보
 const Info = ({ movies }) => {
-  const color = useSelector((state) => state.color);
   const bgcolor = useSelector((state) => state.backgroundColor);
 
   const params = useParams();

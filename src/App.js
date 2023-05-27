@@ -33,6 +33,7 @@ function App() {
     getMovies();
   }, []);
 
+  // 화이트모드/다크모드 전환을 위한 reducer
   const initialState = {
     backgroundColor: "black",
     color: "white",

@@ -8,6 +8,11 @@ import { useState, useEffect } from "react";
 const NavBar = () => {
   const color = useSelector((state) => state.color);
   const bgcolor = useSelector((state) => state.backgroundColor);
+
+  // 스위치 버튼 onChange에 따라 화이트 모드/다크 모드로 변경
+  // 다른 컴포넌트가 렌더링될 때 화면의 화이트/다크 모드 유지는 되지만 스위치가 기본 상태(다크 모드)로 돌아가는 문제가 생겨 localStorage에 체크 상태를 저장해두었습니다.
+  // 그래도 여전히 다른 컴포넌트가 렌더링될 때 스위치가 계속 돌아가는..? 딜레이가 생겨서 자연스럽게 스위치가 유지되려면 어떻게 해야할지 조언주시면 감사하겠습니다.
+  // 기본 상태를 false로 해두어서 그런 것 같은데 사용자가 현재 선택한 스위치 모드로 유지되도록 기본 상태를 설정하려면 어떻게 해야할 지 궁금합니다.
   const [checked, setChecked] = useState(false);
 
   const dispatch = useDispatch();
