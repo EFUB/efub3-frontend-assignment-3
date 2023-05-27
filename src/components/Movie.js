@@ -13,6 +13,13 @@ const Movie = ({ id, cover, title }) => {
 
 const NLink = styled(NavLink)`
   margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: black;
+  &:hover {
+    background: lightgrey;
+  }
 `;
 
 export default Movie;
