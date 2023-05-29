@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 const Detail = (props) => {
   //영화종류에 따라 상세 페이지가 달라야해서 동적으로 id를 지정해줌
@@ -28,17 +29,36 @@ const Detail = (props) => {
   return (
     <div className="Detail">
       {loading ? (
-        <h2>Loading...</h2>
+        <Loading>Loading...</Loading>
       ) : (
-        <div className="detail">
-          <h1>{Mdetail.title}</h1>
+        <DeMain>
+          <Title>{Mdetail.title}</Title>
           <img src={Mdetail.medium_cover_image} />
           <h3>{`Rating: ${Mdetail.rating}`}</h3>
           <h3>{`Running Time: ${Mdetail.runtime} min`}</h3>
-        </div>
+        </DeMain>
       )}
     </div>
   );
 };
 
 export default Detail;
+
+const DeMain = styled.div`
+  text-align: center;
+  background: linear-gradient(black, white);
+`;
+
+const Title = styled.h1`
+  margin-top: 0;
+  padding: 20px;
+  color: white;
+`;
+
+const Loading = styled.h2`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+`;
