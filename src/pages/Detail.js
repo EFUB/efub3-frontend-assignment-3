@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Detail = () => {
+  const theme = useSelector((state) => state);
+
   const { id } = useParams();
   const [movie, setMovie] = useState();
 
@@ -20,7 +23,7 @@ const Detail = () => {
   return (
     <div>
       {movie ? (
-        <Container>
+        <Container theme={theme}>
           <Image src={movie.medium_cover_image} alt="" />
           <Info>
             <Title>{movie.title}</Title>
@@ -42,6 +45,9 @@ const Detail = () => {
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  height: 100vh;
+  background: ${(props) => props.theme.backgroundColor};
+  color: ${(props) => props.theme.color};
 `;
 
 const Image = styled.img`
