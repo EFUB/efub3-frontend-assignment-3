@@ -1,6 +1,6 @@
 import Cover from "./Cover";
 import MovieList from "./MovieList";
-import NavBar from "./NavBar";
+import NavBar from "../common/NavBar";
 
 const Home = ({ movies }) => {
   return (

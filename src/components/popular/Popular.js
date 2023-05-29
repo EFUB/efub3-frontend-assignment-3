@@ -1,5 +1,5 @@
 import PopularMovies from "./PopularMovies";
-import NavBar from "./NavBar";
+import NavBar from "../common/NavBar";
 
 // 유명 영화
 const Popular = ({ movies }) => {

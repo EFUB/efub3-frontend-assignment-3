@@ -1,15 +1,21 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Cover = ({ movies }) => {
   // home 화면 커버 영화
+  const bgcolor = useSelector((props) => props.backgroundColor);
+  const coverColor = useSelector((props) => props.coverColor);
+
   return (
-    <CoverContainer>
+    <CoverContainer bgcolor={bgcolor}>
       <InfoContainer>
         <CoverTitle>{movies.title}</CoverTitle>
-        <Info>{movies.summary}</Info>
+        <Info>{movies.summary.slice(0, 400)}</Info>
         <Link to={`/info/${movies.id}`}>
-          <DetailBtn>Detail Info</DetailBtn>
+          <DetailBtn coverColor={coverColor} color={bgcolor}>
+            Detail Info
+          </DetailBtn>
         </Link>
       </InfoContainer>
       <ImgContainer>
@@ -23,18 +29,19 @@ const Cover = ({ movies }) => {
 const CoverContainer = styled.div`
   position: relative;
   height: 600px;
+  background-color: ${(props) => props.bgcolor};
 `;
 
 const DetailBtn = styled.button`
-  width: 150px;
-  height: 45px;
-  background-color: gray;
+  width: 155px;
+  height: 50px;
+  background-color: ${(props) => props.coverColor};
   border: none;
   border-radius: 10px;
-  color: white;
-  font-size: 17px;
+  color: ${(props) => props.color};
+  font-size: 19px;
   font-weight: 600;
-  margin-top: 40px;
+  margin-top: 45px;
   cursor: pointer;
 `;
 
@@ -49,17 +56,19 @@ const InfoContainer = styled.div`
 
 const ImgContainer = styled.div`
   position: absolute;
-  z-index: -1;
+  z-index: 0;
 `;
 
 const CoverTitle = styled.h1`
   font-size: 4rem;
   margin-bottom: 30px;
+  color: white;
 `;
 
 const Info = styled.p`
   font-size: 17px;
   margin-top: -15px;
+  color: white;
 `;
 
 const CoverImg = styled.img`
@@ -74,7 +83,7 @@ const CoverImg = styled.img`
 
 const BgImg = styled.img`
   width: 100vw;
-  height: 750px;
+  height: 650px;
   filter: blur(10px);
 `;
 

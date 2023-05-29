@@ -1,5 +1,6 @@
-import MovieItem from "./MovieItem";
+import MovieItem from "../movies/MovieItem";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const MovieList = ({ movies }) => {
   // popular movie(기준 : 평점 7.5 초과) : 평점 순으로 정렬
@@ -20,9 +21,12 @@ const MovieList = ({ movies }) => {
   );
   console.log(popularMovies);
 
+  const color = useSelector((state) => state.color);
+  const bgcolor = useSelector((state) => state.backgroundColor);
+
   return (
-    <MovieContainer>
-      <Title>Popular on Netflix</Title>
+    <MovieContainer bgcolor={bgcolor}>
+      <Title color={color}>Popular on Netflix</Title>
       {popularMovies.map((movie, rank) => (
         <MovieItem
           key={movie.id}
@@ -31,7 +35,7 @@ const MovieList = ({ movies }) => {
           rank={rank + 1}
         />
       ))}
-      <Title>Recent Movies</Title>
+      <Title color={color}>Recent Movies</Title>
       {recentMovies.map((movie) => (
         <MovieItem
           key={movie.id}
@@ -39,7 +43,7 @@ const MovieList = ({ movies }) => {
           cvImg={movie.medium_cover_image}
         />
       ))}
-      <Title>Documentary</Title>
+      <Title color={color}>Documentary</Title>
       {DocMovies.map((movie) => (
         <MovieItem
           key={movie.id}
@@ -47,7 +51,7 @@ const MovieList = ({ movies }) => {
           cvImg={movie.medium_cover_image}
         />
       ))}
-      <Title>Drama</Title>
+      <Title color={color}>Drama</Title>
       {dramaMovies.map((movie) => (
         <MovieItem
           key={movie.id}
@@ -55,7 +59,7 @@ const MovieList = ({ movies }) => {
           cvImg={movie.medium_cover_image}
         />
       ))}
-      <Title>Comedy</Title>
+      <Title color={color}>Comedy</Title>
       {comedyMovies.map((movie) => (
         <MovieItem
           key={movie.id}
@@ -68,13 +72,19 @@ const MovieList = ({ movies }) => {
 };
 
 const MovieContainer = styled.div`
-  margin-left: 3rem;
-  margin-top: 60px;
+  padding-left: 3rem;
+  padding-bottom: 50px;
+  background-color: ${(props) => props.bgcolor};
+  position: absolute;
+  z-index: -1;
+  right: 0px;
+  left: 0px;
 `;
 
 const Title = styled.h1`
-  font-size: 25px;
-  margin-top: 30px;
+  font-size: 30px;
+  margin-top: 70px;
+  color: ${(props) => props.color};
 `;
 
 export default MovieList;

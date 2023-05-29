@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { ReactComponent as Arrow } from "../images/arrow.svg";
+import { ReactComponent as Arrow } from "../../images/arrow.svg";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // 영화 개별 정보
 const Info = ({ movies }) => {
+  const bgcolor = useSelector((state) => state.backgroundColor);
+
   const params = useParams();
   const movieId = params.id;
   const navigate = useNavigate();
@@ -24,7 +27,7 @@ const Info = ({ movies }) => {
   };
 
   return (
-    <>
+    <Container bgcolor={bgcolor}>
       <ArrowIcon onClick={handleClick} />
       <BgImg src={movie.background_image} alt={movie.title} />
       <MovieContainer>
@@ -37,13 +40,18 @@ const Info = ({ movies }) => {
           <Summary>{movie.summary.slice(0, 434)}</Summary>
         </InfoContainer>
       </MovieContainer>
-    </>
+    </Container>
   );
 };
 
+const Container = styled.div`
+  background-color: ${(props) => props.bgcolor};
+  height: 100vh;
+`;
+
 const BgImg = styled.img`
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   filter: blur(7px);
   margin-top: 8%;
   width: 80%;
@@ -51,10 +59,15 @@ const BgImg = styled.img`
 `;
 
 const ArrowIcon = styled(Arrow)`
-  width: 40px;
-  margin-left: 5%;
-  margin-top: 20px;
+  width: 30px;
+  height: 30px;
+  margin-left: 7%;
+  margin-top: 30px;
+  padding: 10px;
+  background-color: gray;
+  border-radius: 50%;
   cursor: pointer;
+  opacity: 70%;
 `;
 
 const Img = styled.img`
@@ -64,17 +77,21 @@ const Img = styled.img`
 `;
 
 const MovieContainer = styled.div`
-  margin-left: 12%;
+  margin-left: 16%;
   margin-top: 8%;
   display: flex;
   align-items: flex-start;
+  position: absolute;
+  z-index: 1;
+  width: 80%;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 550px;
+  width: 600px;
   margin-left: 5%;
+  color: white;
 `;
 
 const Title = styled.h1`

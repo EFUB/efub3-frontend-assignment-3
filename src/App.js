@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Intro from "./components/Intro";
-import Home from "./components/Home";
-import Loading from "./components/Loading";
-import Info from "./components/Info";
-import Movies from "./components/Movies";
-import Popular from "./components/Popular";
+import Intro from "./components/Intro/Intro";
+import Home from "./components/home/Home";
+import Loading from "./components/Intro/Loading";
+import Info from "./components/common/Info";
+import Movies from "./components/movies/Movies";
+import Popular from "./components/popular/Popular";
 import { Routes, Route } from "react-router-dom";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 
 function App() {
   // 영화 데이터 저장할 state
@@ -31,31 +33,56 @@ function App() {
     getMovies();
   }, []);
 
-  // 데이터 잘 저장됐는지 확인
-  // console.log(movie);
+  // 화이트모드/다크모드 전환을 위한 reducer
+  const initialState = {
+    backgroundColor: "black",
+    color: "white",
+    coverColor: "#C4C4C4",
+  };
+
+  function reducer(currentState = initialState, action) {
+    const newState = { ...currentState };
+
+    if (action.type === "White") {
+      newState.backgroundColor = "white";
+      newState.color = "black";
+      newState.coverColor = "#BC1111";
+    }
+    if (action.type === "Black") {
+      newState.backgroundColor = "black";
+      newState.color = "white";
+      newState.coverColor = "#C4C4C4";
+    }
+
+    return newState;
+  }
+
+  const store = createStore(reducer);
 
   return (
     <>
       {isLoading ? <Loading /> : ""}
       {/* 데이터가 도착하지 않았는데 아래 컴포넌트를 렌더링하면 오류가 발생하므로 movies.length > 0 으로 확인 */}
-      <Routes>
-        <Route
-          path="/"
-          element={
-            movies.length > 0 && <Intro loading={isLoading.toString()} />
-          }
-        />
-        <Route
-          path="/home"
-          element={movies.length > 0 && <Home movies={movies} />}
-        />
-        <Route
-          path="/info/:id"
-          element={movies.length > 0 && <Info movies={movies} />}
-        />
-        <Route path="/movies" element={<Movies movies={movies} />} />
-        <Route path="/popular" element={<Popular movies={movies} />} />
-      </Routes>
+      <Provider store={store}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              movies.length > 0 && <Intro loading={isLoading.toString()} />
+            }
+          />
+          <Route
+            path="/home"
+            element={movies.length > 0 && <Home movies={movies} />}
+          />
+          <Route
+            path="/info/:id"
+            element={movies.length > 0 && <Info movies={movies} />}
+          />
+          <Route path="/movies" element={<Movies movies={movies} />} />
+          <Route path="/popular" element={<Popular movies={movies} />} />
+        </Routes>
+      </Provider>
     </>
   );
 }
