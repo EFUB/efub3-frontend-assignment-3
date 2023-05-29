@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+import ModeButton from "./ModeButton";
 
 //맨 위에 있는 헤더 컴포넌트. 어떤 페이지이든 위치. App.js에서
 //Route로 공통 컴포넌트로 지정함.
 //오른 쪽 위의 버튼은 각 페이지마다 absolute로 다르게 만듦(Header에 없음)
+
 const Header = () => {
   return (
     <>
@@ -11,6 +13,7 @@ const Header = () => {
         <LogoIcon src="/image/cinema.png" />
         <Title>Movies</Title>
       </Wrapper>
+      <ModeButton />
       <Outlet />
     </>
   );
