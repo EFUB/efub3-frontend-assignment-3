@@ -2,8 +2,11 @@ import { useLocation } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 import { getDetail, getImageUrl } from "../api/tmdb";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const MovieDetail = () => {
+    const isDarkMode = useSelector((state) => state.isDarkMode);
+    
     const location = useLocation();    
     const { id } = location.state;  // link에서 받아온 state (movie.id)
     
@@ -14,20 +17,20 @@ const MovieDetail = () => {
         <>
             <Wrapper>
                 {loading ? (
-                    <Text>Loading</Text>
+                    <LoadingText>Loading</LoadingText>
                 ) : (
                     <Poster // 영화 포스터
                         src={getImageUrl(movie.poster_path, 500)}
                         alt="movie poster" 
                     />
                 )}
-                <InfoBox>
+                <InfoBox isDarkMode={isDarkMode}>
                     <TitleText>{movie.title}</TitleText>    {/* 영화 제목 */}
                     <OutlineText>개요</OutlineText>
                         <OutlineBox>
                             <OutlineBox>
                                 {loading ? (
-                                    <Text>Loading...</Text>
+                                    <LoadingText>Loading...</LoadingText>
                                 ) : (
                                     (movie && movie.genres.map((genre) => {
                                         return (
@@ -36,10 +39,10 @@ const MovieDetail = () => {
                                     }))
                                 )}
                             </OutlineBox>
-                            <SpanLine></SpanLine>
+                            <SpanLine isDarkMode={isDarkMode}></SpanLine>
                             <OutlineBox>
                                 {loading ? (
-                                    <Text>Loading...</Text>
+                                    <LoadingText>Loading...</LoadingText>
                                 ) : (
                                     (movie && movie.production_countries
                                         .map((country) => {
@@ -49,7 +52,7 @@ const MovieDetail = () => {
                                     }))
                                 )}
                             </OutlineBox>
-                            <SpanLine></SpanLine>
+                            <SpanLine isDarkMode={isDarkMode}></SpanLine>
                             <Text>{movie.runtime}분</Text>  {/* 상영 시간 */}
                         </OutlineBox>
                     <OutlineText>개봉</OutlineText>
@@ -77,7 +80,7 @@ const InfoBox = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 1%;
-    background-color: aliceblue;
+    background-color: ${({ isDarkMode }) => (isDarkMode ? "lightslategray" : "aliceblue")};
     padding: 1rem 1.5rem;
 `;
 
@@ -108,12 +111,17 @@ const Text = styled.p`
     margin-top: 0.5rem;
 `;
 
+const LoadingText = styled.p`
+    font-size: 50px;
+    text-align: center;
+`;
+
 const SpanLine = styled.span`
     display: inline-block;
     width: 1px;
     height: 18px;
     margin: 17px 8px 0 -1px;
-    background-color: gray;
+    background-color: ${({ isDarkMode }) => (isDarkMode ? "lightgray" : "gray")};
     vertical-align: middle;
 
 `;

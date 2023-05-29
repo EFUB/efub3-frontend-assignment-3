@@ -1,12 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const MovieListItem = (props) => {
     const { id, title, release_date, poster_src, vote_average } = props;
+    const isDarkMode = useSelector((state) => state.isDarkMode);
 
     return (
-        <Wrapper>
+        <Wrapper isDarkMode={isDarkMode}>
             <Link
                 to={`/detail/${id}`}
                 state={{ id: id }}
@@ -28,14 +30,9 @@ const Wrapper = styled.div`
     width: 150px;
     height: auto;
     text-decoration: none;
-    color: black;
     padding: 2% 5%;
     :hover {
         transform: scale(1.1);
-    }
-    .link {
-        color: black;
-        text-decoration: none;
     }
     cursor: pointer;
 `;
